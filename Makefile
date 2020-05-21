@@ -10,7 +10,7 @@ TWEAK_NAME = AppStoreUpdatesTab13
 BUNDLE_NAME = com.johnzaro.AppStoreUpdatesTab13
 
 AppStoreUpdatesTab13_FILES = AppStoreUpdatesTab13.xm
-AppStoreUpdatesTab13_CFLAGS = -fobjc-arc -Wno-deprecated-declarations -Wno-unused-variable
+AppStoreUpdatesTab13_CFLAGS = -fobjc-arc -Wno-deprecated-declarations
 com.johnzaro.AppStoreUpdatesTab13_INSTALL_PATH = /var/mobile/Library
 
 include $(THEOS)/makefiles/bundle.mk

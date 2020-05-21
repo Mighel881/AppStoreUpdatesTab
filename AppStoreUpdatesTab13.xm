@@ -1,5 +1,7 @@
 #import "AppStoreUpdatesTab13.h"
 
+BOOL addedGestureRecognizer = NO;
+
 %hook UITabBar
 
 - (void)layoutSubviews
@@ -11,17 +13,20 @@
 		if([subview isKindOfClass: %c(UITabBarButton)])
 		{
 			UITabBarButton *button = (UITabBarButton*)subview;
-			UITabBarButtonLabel *_label = MSHookIvar<UITabBarButtonLabel*> (button, "_label");
+			UITabBarButtonLabel *label = MSHookIvar<UITabBarButtonLabel*> (button, "_label");
 			
-			if([[_label text] isEqualToString: @"Arcade"])
+			if([[label text] isEqualToString: @"Arcade"])
 			{
-				[_label setText: @"Updates"];
+				[label setText: @"Updates"];
+				[label setAdjustsFontSizeToFitWidth: YES];
 
-				UITabBarSwappableImageView *_imageView = MSHookIvar<UITabBarSwappableImageView*> (button, "_imageView");
-				_imageView.image = [UIImage imageNamed: @"UpdatesTabIcon-38-56-" inBundle: bundle compatibleWithTraitCollection: nil];
+				[MSHookIvar<UITabBarSwappableImageView*> (button, "_imageView") setImage: [UIImage imageWithContentsOfFile: @"/var/mobile/Library/com.johnzaro.AppStoreUpdatesTab13.bundle/UpdatesTabIcon-38-56-.png"]];
 				
-				UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(openUpdates)];
-				[button addGestureRecognizer: gr];
+				if(!addedGestureRecognizer)
+				{
+					[button addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(openUpdates)]];
+					addedGestureRecognizer = YES;
+				}
 			}
 		}
 	}
@@ -30,16 +35,7 @@
 %new
 - (void)openUpdates
 {
-	UIApplication *application = [%c(UIApplication) sharedApplication];
-
-	[application openURL: [NSURL URLWithString: @"itms-apps://apps.apple.com/updates"]];
+	[[%c(UIApplication) sharedApplication] openURL: [NSURL URLWithString: @"itms-apps://apps.apple.com/updates"]];
 }
 
 %end
-
-%ctor
-{
-	bundle = [[NSBundle alloc] initWithPath: kBundlePath];
-	
-	%init;
-}
