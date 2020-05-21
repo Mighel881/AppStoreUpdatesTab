@@ -1,7 +1,7 @@
 Package: com.johnzaro.appstoreupdatestab13
 Name: AppStoreUpdatesTab13
 Depends: mobilesubstrate, firmware (>= 13)
-Version: 1.1
+Version: 1.1.1
 Architecture: iphoneos-arm
 Description: Replace Arcade button with "Show Updates" button in the AppStore app
 Maintainer: Johnzaro <johnzrgnns@gmail.com>
