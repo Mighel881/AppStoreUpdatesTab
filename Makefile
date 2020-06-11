@@ -6,12 +6,12 @@ INSTALL_TARGET_PROCESSES = AppStore
 
 include $(THEOS)/makefiles/common.mk
 
-TWEAK_NAME = AppStoreUpdatesTab13
-BUNDLE_NAME = com.johnzaro.AppStoreUpdatesTab13
+TWEAK_NAME = AppStoreUpdatesTab
+AppStoreUpdatesTab_FILES = AppStoreUpdatesTab.xm
+AppStoreUpdatesTab_CFLAGS = -fobjc-arc -Wno-deprecated-declarations
 
-AppStoreUpdatesTab13_FILES = AppStoreUpdatesTab13.xm
-AppStoreUpdatesTab13_CFLAGS = -fobjc-arc -Wno-deprecated-declarations
-com.johnzaro.AppStoreUpdatesTab13_INSTALL_PATH = /var/mobile/Library
+BUNDLE_NAME = com.johnzaro.AppStoreUpdatesTab
+com.johnzaro.AppStoreUpdatesTab_INSTALL_PATH = /var/mobile/Library
 
 include $(THEOS)/makefiles/bundle.mk
 include $(THEOS_MAKE_PATH)/tweak.mk
